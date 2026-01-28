@@ -1,0 +1,61 @@
+# SOS Angel - Women Safety App
+
+A mobile application designed to enhance the safety of women by providing quick access to emergency features such as SOS alerts with live location sharing, trusted contacts management, and more.
+
+## Getting Started
+
+1. Install dependencies:
+```
+npm install
+```
+
+2. Configure the Twilio Server:
+   - Navigate to the server directory: `cd server`
+   - Install server dependencies: `npm install`
+   - Start the server: `npm start`
+
+3. Expose the local server to the internet (for development):
+   - Install ngrok: `npm install -g ngrok`
+   - Expose port 3000: `ngrok http 3000`
+   - Copy the HTTPS URL provided by ngrok (e.g., https://1234abcd.ngrok.io)
+
+4. Update the SERVER_URL in `utils/locationUtils.js` with the ngrok URL:
+```javascript
+const SERVER_URL = 'https://1234abcd.ngrok.io'; // Replace with your ngrok URL
+```
+
+5. Start the React Native app:
+```
+npm start
+```
+
+## Features
+
+- **SOS Button:** Quick access emergency button that sends location to trusted contacts
+- **Automatic SMS:** Sends emergency messages without user intervention using Twilio
+- **Trusted Contacts:** Manage emergency contacts who will receive alerts
+- **Live Location Sharing:** Automatically shares precise location during emergencies
+- **Gesture Detection:** Activate SOS mode by shaking the device
+- **Emergency Call:** Quick access to emergency services
+- **Safe Routes:** Navigate through safer paths
+
+## Twilio Integration
+
+This app uses Twilio for sending automatic SMS messages. The implementation ensures:
+- No user intervention needed to send messages
+- Works reliably across all devices
+- Sends messages even if the app is in the background
+- Includes precise location information
+
+## How It Works
+
+1. When the SOS button is pressed or gesture detection is triggered:
+   - The app gets the current location
+   - Location is sent to trusted contacts via Twilio SMS
+   - An alarm sound can be played to deter attackers
+   - The user can cancel the alert by pressing the button again
+
+2. The Twilio server handles the actual SMS sending, which means:
+   - Messages are sent automatically without opening the messages app
+   - No need for the user to press "send"
+   - Messages are delivered even if the phone is locked 
